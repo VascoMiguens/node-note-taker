@@ -21,7 +21,7 @@ router.post("/notes", (req, res) => {
   //generate random id
   let noteId = uuidv4();
 
-  //create newTip object if a note is entered
+  //create newNote object if a note is entered
   if (req.body) {
     newNote = {
       id: noteId,
@@ -35,6 +35,14 @@ router.post("/notes", (req, res) => {
   res.json(newNote);
   //write the note in db.json
   fs.writeFileSync("./db/db.json", JSON.stringify(notes));
+});
+
+router.delete("/notes/:id", (req, res) => {
+  //filter every note that does not match the one clicked
+  notes = notes.filter((item) => item.id !== req.params.id);
+  //replace the notes without the one clicked
+  fs.writeFileSync("./db/db.json", JSON.stringify(notes));
+  res.json(notes);
 });
 
 module.exports = router;
