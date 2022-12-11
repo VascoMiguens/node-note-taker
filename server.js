@@ -1,4 +1,5 @@
 const express = require("express");
+const apiRoutes = require("./routes/notes");
 const app = express();
 const path = require("path");
 
@@ -8,6 +9,7 @@ const PORT = 3001;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use("/api", apiRoutes);
 
 //Get route for homepage
 app.get("/", (req, res) => {
