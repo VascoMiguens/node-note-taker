@@ -1,18 +1,22 @@
 const router = require("express").Router();
 const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
+const util = require("util");
+
+const readFileAsync = util.promisify(fs.readFile);
 
 let notes;
 
 router.get("/notes", (req, res) => {
   //Read notes
-  let result = fs.readFileSync("./db/db.json", "utf8");
-  if (result) {
-    //add notes to databse array
-    notes = [].concat(JSON.parse(result));
-  }
-  //display notes
-  res.json(notes);
+  notes = readFileAsync("./db/db.json", "utf8").then((data) => {
+    if (data) {
+      //add notes to databse array
+      notes = [].concat(JSON.parse(data));
+    }
+    //display notes
+    res.json(notes);
+  });
 });
 
 router.post("/notes", (req, res) => {
@@ -21,27 +25,28 @@ router.post("/notes", (req, res) => {
   //generate random id
   let noteId = uuidv4();
 
-  //create newNote object if a note is entered
+  //create newNote object when a note is entered
   if (req.body) {
     newNote = {
       id: noteId,
       title,
       text,
     };
-    //add it to the notes array
-    notes.push(newNote);
   }
-  //display the new note
-  res.json(newNote);
-  //write the note in db.json
+  //append the newNote to the existing notes
+  notes.push(newNote);
+  //rewrite the notes with the newNote in db.json
   fs.writeFileSync("./db/db.json", JSON.stringify(notes));
+  //display the new note in the list
+  res.json(notes);
 });
 
 router.delete("/notes/:id", (req, res) => {
-  //filter every note that does not match the one clicked
+  //filter out the note that we want to eliminate
   notes = notes.filter((item) => item.id !== req.params.id);
-  //replace the notes without the one clicked
+  //rewrite the notes without the note that was filtered out
   fs.writeFileSync("./db/db.json", JSON.stringify(notes));
+  //display the notes
   res.json(notes);
 });
 
