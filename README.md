@@ -1,4 +1,4 @@
-# node-note-taker-api Note Taker ![GNU GENERAL PUBLIC LICENSE v3.0](https://img.shields.io/badge/license-GPLv3-blue.svg)
+# node-note-taker-api ![GNU GENERAL PUBLIC LICENSE v3.0](https://img.shields.io/badge/license-GPLv3-blue.svg)
 
 ## Table of Contents
 * [Description](#description)
