@@ -1,6 +1,1 @@
-[
-    {
-        "title":"Test Title",
-        "text":"Test text"
-    }
-]
+[{"id":"8d97a6f3-486f-41a8-a1be-80a8b878d439","title":"A new note","text":"here is a new note"},{"id":"bcf12ca5-69ee-44cc-b8ed-9c0be9febe82","title":"Another note","text":"something else"},{"id":"18ba6074-a42c-4900-96ec-3c953326b9ae","title":"Reminder for a meeting","text":"We have to meet today"},{"id":"41a2db97-f329-4a46-9bc6-326eaee5c264","title":"Take out the trash","text":"When i get home i have to take out the trash"}]
