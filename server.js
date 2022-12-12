@@ -3,7 +3,7 @@ const apiRoutes = require("./routes/notes");
 const app = express();
 const path = require("path");
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 //Middleware for parsing JSON and urlencoded form data
 app.use(express.json());
